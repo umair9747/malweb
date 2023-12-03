@@ -18,3 +18,18 @@ var cliArgs []string
 var targets []string
 
 var malURLs []string
+var malDepthURLs []string
+
+var saveFlag string
+var depthFlag bool
+
+type Result struct {
+	Hit       string `json:"Hit"`
+	Source    string `json:"Source"`
+	DepthMode bool   `json:"DepthMode"`
+}
+
+type TargetResult struct {
+	Target  string   `json:"Target"`
+	Results []Result `json:"Results"`
+}

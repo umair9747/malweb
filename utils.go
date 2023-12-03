@@ -79,7 +79,6 @@ func fetchAndSaveURLhausData(fileName string) {
 		log.Fatal("Error reading response body:", err)
 	}
 
-	// Join the filtered lines and write to the file
 	data := strings.Join(filteredLines, "\n")
 	err = ioutil.WriteFile(fileName, []byte(data), 0644)
 	if err != nil {
@@ -90,19 +89,20 @@ func fetchAndSaveURLhausData(fileName string) {
 }
 
 func takeInput() {
-	// Define a boolean flag '-domains' or '-d'
+	// Define the flags
+	flag.BoolVar(&depthFlag, "depth", false, "Specifies whether to use the depth mode. [Scan for root domains and IP addresses.]")
+	flag.StringVar(&saveFlag, "save", "output.json", "Specifies the output file name. If kept empty, default output file name is output.json")
 
-	// Parse the command line arguments
 	flag.Parse()
 
-	// Get the arguments after the flags
 	cliArgs = flag.Args()
 	if len(cliArgs) > 0 {
 		for _, cliArg := range cliArgs {
-			if strings.HasPrefix(cliArg, "http") {
+			if strings.HasPrefix(cliArg, "https") {
 				targets = append(targets, cliArg)
 			} else {
-				targets = append(targets, "https://"+cliArg+"/")
+				targets = append(targets, "http://"+cliArg)
+				targets = append(targets, "https://"+cliArg)
 			}
 		}
 	} else {
@@ -151,4 +151,18 @@ func extractURLs(input string) []string {
 	matches := urlRegex.FindAllString(input, -1)
 
 	return matches
+}
+
+func uniqueList(input []string) []string {
+	uniqueMap := make(map[string]bool)
+	uniqueList := make([]string, 0)
+
+	for _, item := range input {
+		if !uniqueMap[item] {
+			uniqueMap[item] = true
+			uniqueList = append(uniqueList, item)
+		}
+	}
+
+	return uniqueList
 }
