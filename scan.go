@@ -42,7 +42,7 @@ func scanTargets() {
 			log.Println("[Phase 4 - Depth Mode] Matching the domain(s)/IP Address(es) against URLhaus DB...")
 			checkURLhausDepthMode(extURLs)
 			if len(malDepthURLs) > 0 {
-				log.Println("Found", len(malURLs), "malicious domain(s)/IP Address(es) from the list!")
+				log.Println("Found", len(malDepthURLs), "malicious domain(s)/IP Address(es) from the list!")
 				for _, malURL := range malDepthURLs {
 					res := Result{Hit: malURL, Source: "URLhaus", DepthMode: true}
 					targetResults = append(targetResults, res)

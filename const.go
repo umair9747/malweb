@@ -8,7 +8,7 @@ const (
 	| |  | | (_| | | \ V  V /  __/ |_) |
 	|_|  |_|\__,_|_|  \_/\_/ \___|_.__/ 
 										
-			- Developed by Umair Nehri (0x9747)
+			- Developed by Umair Nehri (https://twitter.com/0x9747)
 	`
 )
 
