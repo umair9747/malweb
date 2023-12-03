@@ -26,6 +26,7 @@ func scanTargets() {
 			extURLs = extractURLs(targetResp)
 		}
 		extURLs = append(extURLs, target)
+		extURLs = uniqueList(extURLs)
 		log.Println("Discovered", len(extURLs), "URL(s) related to the target.")
 
 		log.Println("[Phase 3] Matching the URL(s) against URLhaus DB...")
